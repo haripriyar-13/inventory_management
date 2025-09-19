@@ -9,31 +9,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">Inventory Management</a>
+            <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+                <i class="fas fa-warehouse me-2"></i>Inventory Management
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('products') }}">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('locations') }}">Locations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('movements') }}">Movements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('report') }}">Report</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}"><i class="fas fa-home me-1"></i>Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('products') }}"><i class="fas fa-box me-1"></i>Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('locations') }}"><i class="fas fa-map-marker-alt me-1"></i>Locations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('movements') }}"><i class="fas fa-exchange-alt me-1"></i>Movements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('report') }}"><i class="fas fa-chart-line me-1"></i>Report</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- Flash Messages -->
     <div class="container mt-4">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -49,6 +47,71 @@
         {% block content %}{% endblock %}
     </div>
 
+    <!-- About Section -->
+    <div class="container my-5">
+        <div class="p-4 bg-light rounded shadow-sm">
+            <h2 class="fw-bold text-center mb-3"><i class="fas fa-info-circle me-2"></i>About This Project</h2>
+            <p class="lead text-muted text-center">
+                This Inventory Management System is a Flask-based web application designed to help businesses 
+                manage products, track stock levels, monitor movements, and generate reports for better decision-making.
+            </p>
+
+            <!-- Workflow -->
+            <h3 class="mt-4"><i class="fas fa-project-diagram me-2 text-primary"></i>Workflow</h3>
+            <ol>
+                <li><strong>Create Products:</strong> Define items like Product A, Product B, etc.</li>
+                <li><strong>Set up Locations:</strong> Add warehouses or storage areas like Location X, Y, Z.</li>
+                <li><strong>Record Movements:</strong> Track product transfers between locations (e.g., Product A → Location X).</li>
+                <li><strong>Generate Reports:</strong> View stock balances per product and location in real-time.</li>
+            </ol>
+
+            <!-- Key Features -->
+            <h3 class="mt-4"><i class="fas fa-star me-2 text-success"></i>Key Features</h3>
+            <ul>
+                <li>Simple product and warehouse management</li>
+                <li>Real-time tracking of stock movements</li>
+                <li>Inventory balance reports with product-wise and location-wise breakdowns</li>
+                <li>Responsive and user-friendly design</li>
+            </ul>
+
+            <!-- Modules -->
+            <h3 class="mt-4"><i class="fas fa-cubes me-2 text-danger"></i>Modules</h3>
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <i class="fas fa-box fa-2x text-primary mb-2"></i>
+                    <h6>Product Management</h6>
+                    <p class="small">Add, update, and view all available products.</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <i class="fas fa-warehouse fa-2x text-success mb-2"></i>
+                    <h6>Location Management</h6>
+                    <p class="small">Manage multiple warehouses and stock points.</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <i class="fas fa-exchange-alt fa-2x text-warning mb-2"></i>
+                    <h6>Movements</h6>
+                    <p class="small">Track transfers between different locations.</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <i class="fas fa-chart-bar fa-2x text-danger mb-2"></i>
+                    <h6>Reports</h6>
+                    <p class="small">Generate stock balance reports instantly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-1">© {{ current_year }} Inventory Management System | All Rights Reserved</p>
+            <small>
+                <i class="fas fa-code me-1"></i> Built with Flask, MySQL, and Bootstrap
+            </small>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
