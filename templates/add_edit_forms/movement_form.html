@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="mb-4">{{ form_type }} Product Movement</h2>
+        
+        <form method="POST">
+            <div class="mb-3">
+                <label for="product_id" class="form-label">Product</label>
+                <select class="form-select" id="product_id" name="product_id" required>
+                    <option value="">Select Product</option>
+                    {% for product in products %}
+                        <option value="{{ product.product_id }}" 
+                            {% if movement and movement.product_id == product.product_id %}selected{% endif %}>
+                            {{ product.product_name }} ({{ product.product_id }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="from_location" class="form-label">From Location</label>
+                    <select class="form-select" id="from_location" name="from_location">
+                        <option value="">Select Location (Leave blank for incoming)</option>
+                        {% for location in locations %}
+                            <option value="{{ location.location_id }}" 
+                                {% if movement and movement.from_location == location.location_id %}selected{% endif %}>
+                                {{ location.location_name }} ({{ location.location_id }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="to_location" class="form-label">To Location</label>
+                    <select class="form-select" id="to_location" name="to_location">
+                        <option value="">Select Location (Leave blank for outgoing)</option>
+                        {% for location in locations %}
+                            <option value="{{ location.location_id }}" 
+                                {% if movement and movement.to_location == location.location_id %}selected{% endif %}>
+                                {{ location.location_name }} ({{ location.location_id }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="qty" class="form-label">Quantity</label>
+                <input type="number" class="form-control" id="qty" name="qty" 
+                       value="{{ movement.qty if movement }}" min="1" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="{{ url_for('movements') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
